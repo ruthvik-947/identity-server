@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(superpowers:executing-plans)",
+      "Bash(python3:*)",
+      "Bash(source .venv/bin/activate)",
+      "Bash(pip install:*)",
+      "Bash(source:*)",
+      "Bash(python -c:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
