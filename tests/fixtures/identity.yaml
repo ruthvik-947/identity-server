@@ -1,0 +1,26 @@
+name: Test User
+pronouns: they/them
+
+background:
+  summary: A test user for unit tests
+  skills:
+    - python
+    - testing
+
+current_focus:
+  - Writing tests
+  - Building identity server
+
+interests:
+  - topic: programming
+    depth: deep
+
+values:
+  - Test-driven development
+
+privacy:
+  public:
+    - name
+    - background
+  private:
+    - personal_notes
