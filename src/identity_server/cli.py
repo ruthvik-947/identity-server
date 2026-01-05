@@ -155,7 +155,9 @@ sources:
     (identity_dir / "sources.yaml").write_text(sources_example)
 
     click.echo(f"Initialized identity directory at {identity_dir}")
-    click.echo("Edit identity.yaml and sources.yaml to configure.")
+    click.echo(f"  - {identity_file}")
+    click.echo(f"  - {sources_file}")
+    click.echo("\nEdit these files to configure your identity and sources.")
 
 @main.command()
 def serve():
