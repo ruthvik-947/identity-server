@@ -74,6 +74,48 @@ identity sync
 - `rss` - RSS/Atom feeds
 - `custom` - Python script connectors
 
+## Custom Connectors
+
+Create Python scripts to pull data from any source (APIs, databases, etc.).
+
+**1. Create a connector in `~/.identity/connectors/`:**
+
+```python
+# ~/.identity/connectors/my_connector.py
+
+def fetch(config):
+    """
+    Args:
+        config: dict from sources.yaml 'config' field
+
+    Returns:
+        list of dicts with: title, body, tags (optional), timestamp (optional)
+    """
+    return [
+        {
+            "title": "Example Item",
+            "body": "Content goes here...",
+            "tags": ["tag1", "tag2"],
+        }
+    ]
+```
+
+**2. Add to `sources.yaml`:**
+
+```yaml
+sources:
+  - name: my-source
+    type: custom
+    connector: connectors/my_connector.py  # relative to ~/.identity
+    privacy: private
+    config:  # passed to fetch()
+      api_key: "..."
+```
+
+**3. Run `identity sync` to execute connectors and index results.**
+
+Connectors only run during sync—the MCP server queries the local database.
+
 ## Privacy
 
 Tag sources as `public` or `private`. Private content is excluded from MCP queries.
