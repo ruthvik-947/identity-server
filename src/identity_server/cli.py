@@ -89,9 +89,12 @@ def sources():
 def init_cmd(force: bool):
     """Initialize identity directory with example files."""
     identity_dir = get_identity_dir()
+    identity_file = identity_dir / "identity.yaml"
+    sources_file = identity_dir / "sources.yaml"
 
-    if identity_dir.exists() and not force:
-        click.echo(f"Identity directory exists at {identity_dir}")
+    # Check if config files already exist (not just the directory)
+    if not force and identity_file.exists() and sources_file.exists():
+        click.echo(f"Identity already configured at {identity_dir}")
         click.echo("Use --force to reinitialize.")
         return
 
