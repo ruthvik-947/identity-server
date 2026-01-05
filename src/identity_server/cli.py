@@ -4,11 +4,6 @@ from pathlib import Path
 
 import click
 
-from identity_server.loader import load_identity
-from identity_server.sources import load_sources
-from identity_server.sync import SyncManager
-from identity_server.server import run_server
-
 def get_identity_dir() -> Path:
     return Path(os.environ.get("IDENTITY_DIR", Path.home() / ".identity"))
 
@@ -20,6 +15,8 @@ def main():
 @main.command()
 def status():
     """Show current identity status."""
+    from identity_server.loader import load_identity
+
     identity_dir = get_identity_dir()
 
     identity_path = identity_dir / "identity.yaml"
@@ -38,6 +35,9 @@ def status():
 @click.option("--source", "-s", help="Sync specific source only")
 def sync(source: str | None):
     """Sync all sources or a specific source."""
+    from identity_server.sources import load_sources
+    from identity_server.sync import SyncManager
+
     identity_dir = get_identity_dir()
 
     sources_path = identity_dir / "sources.yaml"
@@ -66,6 +66,8 @@ def sync(source: str | None):
 @main.command()
 def sources():
     """List configured sources."""
+    from identity_server.sources import load_sources
+
     identity_dir = get_identity_dir()
 
     sources_path = identity_dir / "sources.yaml"
@@ -155,6 +157,8 @@ sources:
 @main.command()
 def serve():
     """Start the MCP server."""
+    from identity_server.server import run_server
+
     identity_dir = get_identity_dir()
 
     if not (identity_dir / "identity.yaml").exists():
